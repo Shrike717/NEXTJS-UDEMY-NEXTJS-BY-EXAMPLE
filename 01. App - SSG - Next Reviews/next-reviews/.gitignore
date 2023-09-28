@@ -1,0 +1,11 @@
+# local env files
+.*.env
+
+# local node_modules folder:
+node_modules/
+
+# next:
+.next/
+
+
+.swc/
