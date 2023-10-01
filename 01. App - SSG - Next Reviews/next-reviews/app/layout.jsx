@@ -13,17 +13,13 @@ export default function RootLayout({ children }) {
 					<nav>
 						<ul>
 							<li>
-								<Link href="/" prefetch={true}>
-									Home
-								</Link>
+								<Link href="/">Home</Link>
 							</li>
 							<li>
-								<Link href="/reviews" prefetch={true}>
-									Reviews
-								</Link>
+								<Link href="/reviews">Reviews</Link>
 							</li>
 							<li>
-								<Link href="/about" prefetch={true}>
+								<Link href="/about" prefetch={false}>
 									About
 								</Link>
 							</li>
