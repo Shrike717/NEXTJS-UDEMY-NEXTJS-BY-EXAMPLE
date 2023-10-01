@@ -1,8 +1,8 @@
 export default function AboutPage() {
 	return (
 		<>
-			<h1>About Us:</h1>
-			<p>This will be a page with information about this website:</p>
+			<h1>About:</h1>
+			<p>A website created to learn Next.js</p>
 		</>
 	);
 }
