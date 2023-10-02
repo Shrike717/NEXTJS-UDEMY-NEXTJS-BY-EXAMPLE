@@ -1,6 +1,6 @@
 // Importing th Link component to use client-side navigation
 import Link from "next/link";
-import NavBar from "../components/NavBar";
+import NavBar from "@/components/NavBar";
 // Importing global style css:
 import "./globals.css";
 
