@@ -1,5 +1,7 @@
 // Importing th Link component to use client-side navigation
 import Link from "next/link";
+// Importing global style css:
+import "./globals.css";
 
 // Next RootLayout Template component
 export default function RootLayout({ children }) {
