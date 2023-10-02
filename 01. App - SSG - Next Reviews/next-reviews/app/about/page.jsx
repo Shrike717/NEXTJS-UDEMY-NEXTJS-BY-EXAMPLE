@@ -1,9 +1,9 @@
-import Heading from "../../components/Heading";
+import Heading from "@/components/Heading";
 
 export default function AboutPage() {
 	return (
 		<>
-			<Heading>About:</Heading>
+			<Heading>About</Heading>
 			<p>A website created to learn Next.js</p>
 		</>
 	);
