@@ -1,10 +1,11 @@
 // Importing th Link component to use client-side navigation
 import Link from "next/link";
+import Heading from "../../components/Heading";
 
 export default function ReviewsPage() {
 	return (
 		<>
-			<h1>Reviews:</h1>
+			<Heading>Reviews:</Heading>
 			<ul>
 				<li>
 					<Link href="/reviews/hollow-knight">Hollow Knight</Link>
