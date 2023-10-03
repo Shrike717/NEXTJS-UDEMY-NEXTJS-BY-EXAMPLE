@@ -5,11 +5,16 @@ export default function NavBar() {
 		<nav>
 			<ul className="flex gap-2">
 				<li>
-					<Link href="/" className="text-orange-800 hover:underline">
-						Home
+					<Link
+						href="/"
+						className="font-orbitron font-bold text-orange-800 hover:underline"
+					>
+						Indie Gamer
 					</Link>
 				</li>
-				<li>
+				<li className="ml-auto">
+					{" "}
+					{/* ml-auto pushes the element to the right */}
 					<Link
 						href="/reviews"
 						className="text-orange-800 hover:underline"
