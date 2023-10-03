@@ -1,14 +1,15 @@
 // Importing th Link component to use client-side navigation
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { orbitron } from "./fonts"; // Importing custom font to use it as utility font class
+import { orbitron, exo_2 } from "./fonts"; // Importing custom font to use it as utility font class
 // Importing global style css:
 import "./globals.css";
 
 // Next RootLayout Template component
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en" className={orbitron.variable}>
+		// Making font available in the whole app. exo_2 is default font
+		<html lang="en" className={`${exo_2.variable} ${orbitron.variable}`}>
 			<head>
 				<title>Next.js App</title>
 			</head>
