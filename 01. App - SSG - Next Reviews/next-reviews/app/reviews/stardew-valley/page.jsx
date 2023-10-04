@@ -1,18 +1,25 @@
 import { readFile } from "node:fs/promises";
-import { marked } from "marked";
+import matter from "gray-matter"; // This package is used for parsing the metadata of the markdown file
+import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import Heading from "@/components/Heading";
 
 export default async function StardewValleyPage() {
 	// Getting markdown text by awaiting the readFile call:
 	const text = await readFile("./content/reviews/stardew-valley.md", "utf-8");
-	// Converting the markdown to html:
-	const html = marked(text);
+	// Parsing the Front Matter:
+	const {
+		content,
+		data: { title, date, image },
+	} = matter(text);
+	// Converting the contentt of the markdown to html:
+	const html = marked(content);
 
 	return (
 		<>
-			<Heading>Stardew Valley</Heading>
+			<Heading>{title}</Heading>
+			<p className="italic pb-2">{date}</p>
 			<img
-				src="/images/stardew-valley.jpg"
+				src={image}
 				alt=""
 				width="640"
 				height="360"
