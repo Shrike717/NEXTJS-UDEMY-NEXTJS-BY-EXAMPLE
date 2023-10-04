@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
 					<NavBar />
 				</header>
 				<main className="py-3 grow">{children}</main>
-				<footer className="border-t py-3 text-center text-xs">
+				<footer className="border-t py-3 text-center text-xs text-slate-500">
 					Game data and images courtesy of{" "}
 					<a
 						href="https://rawg.io/"

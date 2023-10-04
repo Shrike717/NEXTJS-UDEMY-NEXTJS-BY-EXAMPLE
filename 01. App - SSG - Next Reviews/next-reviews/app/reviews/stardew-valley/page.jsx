@@ -19,7 +19,11 @@ export default async function StardewValleyPage() {
 				className="mb-2 rounded"
 			/>
 			{/* Showing the markdown text */}
-			<article dangerouslySetInnerHTML={{ __html: html }} />
+			<article
+				dangerouslySetInnerHTML={{ __html: html }}
+				// max-w-screen-sm = also 640px like the image
+				className="prose prose-slate max-w-screen-sm"
+			/>
 		</>
 	);
 }
