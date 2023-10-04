@@ -1,9 +1,12 @@
 import { readFile } from "node:fs/promises";
+import { marked } from "marked";
 import Heading from "@/components/Heading";
 
 export default async function StardewValleyPage() {
-	// Getting marrkdown text by awaiting the readFile call:
+	// Getting markdown text by awaiting the readFile call:
 	const text = await readFile("./content/reviews/stardew-valley.md", "utf-8");
+	// Converting the markdown to html:
+	const html = marked(text);
 
 	return (
 		<>
@@ -16,7 +19,7 @@ export default async function StardewValleyPage() {
 				className="mb-2 rounded"
 			/>
 			{/* Showing the markdown text */}
-			{text}
+			<article dangerouslySetInnerHTML={{ __html: html }} />
 		</>
 	);
 }
