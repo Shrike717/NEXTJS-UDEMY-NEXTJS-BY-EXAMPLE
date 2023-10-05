@@ -1,9 +1,10 @@
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews";
 
-export default async function StardewValleyPage() {
-	// Calling the getReviews function:
-	const review = await getReviews("stardew-valley");
+// Here we dekonstruct the path from the url. The slug is the name of the markdown file
+export default async function ReviewPage({ params: { slug } }) {
+	// Calling the getReviews function  with the dynamic slug parameter:
+	const review = await getReviews(slug);
 	return (
 		<>
 			<Heading>{review.title}</Heading>
