@@ -2,6 +2,12 @@ import { readdir, readFile } from "node:fs/promises";
 import matter from "gray-matter"; // This package is used for parsing the metadata of the markdown file
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 
+// Function returns a single object with all needed properties
+export async function getFeaturedReview() {
+	const reviews = await getReviews();
+	return reviews[0];
+}
+
 // This component is used to get the data of a single review:
 export async function getReview(slug) {
 	// Getting markdown text by awaiting the readFile call:
@@ -26,7 +32,7 @@ export async function getReview(slug) {
 export async function getReviews() {
 	// Now filtering out the markdown files from the filenames
 	// The filter function returns true if the file is a markdown file:
-	const slugs = await getSlugs();
+	let slugs = await getSlugs();
 
 	// Now getting the data of all the reviews:
 	const reviews = [];
@@ -36,6 +42,16 @@ export async function getReviews() {
 		reviews.push(review);
 	}
 
+	// Sort the array by the "date" property in descending order. Needed for the homepage:
+	// My solution:
+	// reviews.sort((a, b) => {
+	// 	const dateA = new Date(a.date);
+	// 	const dateB = new Date(b.date);
+	// 	return dateB - dateA;
+	// });
+
+	// Solution from the course:
+	reviews.sort((a, b) => b.date.localeCompare(a.date));
 	return reviews;
 }
 
