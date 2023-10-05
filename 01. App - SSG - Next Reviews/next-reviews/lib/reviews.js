@@ -24,15 +24,9 @@ export async function getReview(slug) {
 
 // This component is used to get the data of all reviews:
 export async function getReviews() {
-	// Getting the filenames of all the markdown files:
-	const files = await readdir("./content/reviews");
-
 	// Now filtering out the markdown files from the filenames
 	// The filter function returns true if the file is a markdown file:
-	const slugs = files
-		.filter((file) => file.endsWith(".md"))
-		// Removing the .md extension from the filenames:
-		.map((file) => file.replace(".md", ""));
+	const slugs = await getSlugs();
 
 	// Now getting the data of all the reviews:
 	const reviews = [];
@@ -43,4 +37,20 @@ export async function getReviews() {
 	}
 
 	return reviews;
+}
+
+// This function is used to get the slugs:
+export async function getSlugs() {
+	// Getting the filenames of all the markdown files:
+	const files = await readdir("./content/reviews");
+
+	// Now filtering out the markdown files from the filenames
+	// The filter function returns true if the file is a markdown file:
+	// We get back just the filenames. These are the slugs
+	return (
+		files
+			.filter((file) => file.endsWith(".md"))
+			// Removing the .md extension from the filenames:
+			.map((file) => file.replace(".md", ""))
+	);
 }
