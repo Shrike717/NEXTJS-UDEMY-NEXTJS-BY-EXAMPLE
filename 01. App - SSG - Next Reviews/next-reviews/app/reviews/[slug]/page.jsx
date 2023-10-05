@@ -1,11 +1,23 @@
 import Heading from "@/components/Heading";
-import { getReview } from "@/lib/reviews";
+import { getReview, getSlugs } from "@/lib/reviews";
+
+// This function generates an array of objects with the slugs of the markdown files.
+// The slugs are used to generate the static paths for the SSG pages.
+export async function generateStaticParams() {
+	const slugs = await getSlugs(); // But this is an array of strings
+	// We need to convert the array of strings to an array of objects:
+	return slugs.map((slug) => ({ slug }));
+}
 
 // This component is responsible for showing the single review page
 // Here we dekonstruct the path from the url. The slug is the name of the markdown file
 export default async function ReviewPage({ params: { slug } }) {
 	// Calling the getReview function  with the dynamic slug parameter:
 	const review = await getReview(slug);
+
+	// Loggin slug to test SSR behaviour in dev and poduction
+	console.log("[ReviewPage] rendering", slug);
+
 	return (
 		<>
 			<Heading>{review.title}</Heading>
