@@ -6,42 +6,32 @@ import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
 export default async function ReviewsPage() {
 	// Getting all the reviews:
 	const reviews = await getReviews();
-	console.log("[Reviews] reviews:", reviews);
+	// console.log("[Reviews] reviews:", reviews);
 
 	return (
 		<>
 			<Heading>Reviews</Heading>
-			<ul className="flex flex-col gap-3">
-				{/* w-80 is exactly 320px. Thats the same width as the image. Border is now aligned */}
-				<li className=" bg-white border rounded shadow w-80 hover:shadow-xl">
-					<Link href="/reviews/hollow-knight">
-						<img
-							src="/images/hollow-knight.jpg"
-							alt=""
-							width="320"
-							height="180"
-							className="rounded-t"
-						/>
-						<h2 className="font-orbitron font-semibold py-1 text-center">
-							Hollow Knight
-						</h2>
-					</Link>
-				</li>
-
-				<li className=" bg-white border rounded shadow w-80 hover:shadow-xl">
-					<Link href="/reviews/stardew-valley">
-						<img
-							src="/images/stardew-valley.jpg"
-							alt=""
-							width="320"
-							height="180"
-							className="rounded-t"
-						/>
-						<h2 className="font-orbitron font-semibold py-1 text-center">
-							Stardew Valley
-						</h2>
-					</Link>
-				</li>
+			<ul className="flex flex-row flex-wrap gap-3 ">
+				{reviews.map((review) => (
+					<li
+						key={review.slug}
+						className=" bg-white border rounded shadow w-80 hover:shadow-xl"
+					>
+						{/* w-80 is exactly 320px. Thats the same width as the image. Border is now aligned */}
+						<Link href={`/reviews/${review.slug}`}>
+							<img
+								src={review.image}
+								alt=""
+								width="320"
+								height="180"
+								className="rounded-t"
+							/>
+							<h2 className="font-orbitron font-semibold py-1 text-center">
+								{review.title}
+							</h2>
+						</Link>
+					</li>
+				))}
 			</ul>
 		</>
 	);
