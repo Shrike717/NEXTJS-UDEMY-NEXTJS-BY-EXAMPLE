@@ -1,25 +1,15 @@
-import { readFile } from "node:fs/promises";
-import matter from "gray-matter"; // This package is used for parsing the metadata of the markdown file
-import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import Heading from "@/components/Heading";
+import { getReviews } from "@/lib/reviews";
 
 export default async function StardewValleyPage() {
-	// Getting markdown text by awaiting the readFile call:
-	const text = await readFile("./content/reviews/stardew-valley.md", "utf-8");
-	// Parsing the Front Matter:
-	const {
-		content,
-		data: { title, date, image },
-	} = matter(text);
-	// Converting the contentt of the markdown to html:
-	const html = marked(content);
-
+	// Calling the getReviews function:
+	const review = await getReviews("stardew-valley");
 	return (
 		<>
-			<Heading>{title}</Heading>
-			<p className="italic pb-2">{date}</p>
+			<Heading>{review.title}</Heading>
+			<p className="italic pb-2">{review.date}</p>
 			<img
-				src={image}
+				src={review.image}
 				alt=""
 				width="640"
 				height="360"
@@ -27,7 +17,7 @@ export default async function StardewValleyPage() {
 			/>
 			{/* Showing the markdown text */}
 			<article
-				dangerouslySetInnerHTML={{ __html: html }}
+				dangerouslySetInnerHTML={{ __html: review.body }}
 				// max-w-screen-sm = also 640px like the image
 				className="prose prose-slate max-w-screen-sm"
 			/>
