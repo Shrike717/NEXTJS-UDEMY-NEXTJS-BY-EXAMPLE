@@ -1,8 +1,13 @@
 // Importing th Link component to use client-side navigation
 import Link from "next/link";
 import Heading from "@/components/Heading";
+import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+	// Getting all the reviews:
+	const reviews = await getReviews();
+	console.log("[Reviews] reviews:", reviews);
+
 	return (
 		<>
 			<Heading>Reviews</Heading>
