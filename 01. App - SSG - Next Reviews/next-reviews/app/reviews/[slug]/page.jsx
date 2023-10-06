@@ -9,6 +9,18 @@ export async function generateStaticParams() {
 	return slugs.map((slug) => ({ slug }));
 }
 
+// This function is used to generate the metadata from the markdown files:
+export async function generateMetadata({ params: { slug } }) {
+	// Calling the getReview function  with the dynamic slug parameter:
+	const review = await getReview(slug);
+	// Then returning the metadata object:
+	return {
+		title: review.title,
+		// description: review.description,
+		// image: review.image,
+	};
+}
+
 // This component is responsible for showing the single review page
 // Here we dekonstruct the path from the url. The slug is the name of the markdown file
 export default async function ReviewPage({ params: { slug } }) {
