@@ -3,6 +3,14 @@ import { orbitron, exo_2 } from "./fonts"; // Importing custom font to use it as
 // Importing global style css:
 import "./globals.css";
 
+// Metatags as template:
+export const metadata = {
+	title: {
+		default: "Indie Gamer",
+		template: "%s | Indie Gamer",
+	},
+};
+
 // Next RootLayout Template component
 export default function RootLayout({ children }) {
 	return (
