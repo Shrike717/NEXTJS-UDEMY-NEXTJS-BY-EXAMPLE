@@ -1,5 +1,3 @@
-// Importing th Link component to use client-side navigation
-import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import { orbitron, exo_2 } from "./fonts"; // Importing custom font to use it as utility font class
 // Importing global style css:
@@ -10,9 +8,7 @@ export default function RootLayout({ children }) {
 	return (
 		// Making font available in the whole app. exo_2 is default font
 		<html lang="en" className={`${exo_2.variable} ${orbitron.variable}`}>
-			<head>
-				<title>Next.js App</title>
-			</head>
+			<head></head>
 			<body className="bg-orange-50 flex flex-col px-4 py-2 min-h-screen">
 				<header>
 					<NavBar />
