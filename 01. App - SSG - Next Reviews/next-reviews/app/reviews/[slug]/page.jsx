@@ -29,7 +29,7 @@ export default async function ReviewPage({ params: { slug } }) {
 	const review = await getReview(slug);
 
 	// Loggin slug to test SSR behaviour in dev and poduction
-	console.log("[ReviewPage] rendering", slug);
+	// console.log("[ReviewPage] rendering", slug);
 
 	return (
 		<>
