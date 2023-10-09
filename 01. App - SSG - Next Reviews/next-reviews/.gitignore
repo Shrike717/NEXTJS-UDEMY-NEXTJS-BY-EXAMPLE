@@ -12,5 +12,5 @@ node_modules/
 # next:
 .next/
 
-
-.swc/
+# Static exports:
+out/
