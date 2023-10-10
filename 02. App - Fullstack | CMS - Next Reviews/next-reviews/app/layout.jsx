@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
 					>
 						RAWG
 					</a>{" "}
-					| Hosted by Vercel!!!
+					| Hosted by
 				</footer>
 			</body>
 		</html>
