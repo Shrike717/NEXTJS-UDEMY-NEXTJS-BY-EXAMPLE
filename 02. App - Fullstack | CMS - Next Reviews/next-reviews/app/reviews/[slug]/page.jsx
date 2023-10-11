@@ -30,9 +30,7 @@ export async function generateMetadata({ params: { slug } }) {
 export default async function ReviewPage({ params: { slug } }) {
 	// Calling the getReview function  with the dynamic slug parameter:
 	const review = await getReview(slug);
-
-	// Loggin slug to test SSR behaviour in dev and poduction
-	// console.log("[ReviewPage] rendering", slug);
+	console.log("[ReviewPage] review", review);
 
 	return (
 		<>
