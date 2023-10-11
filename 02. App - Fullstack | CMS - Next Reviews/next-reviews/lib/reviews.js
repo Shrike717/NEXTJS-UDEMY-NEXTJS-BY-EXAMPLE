@@ -3,6 +3,8 @@ import matter from "gray-matter"; // This package is used for parsing the metada
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import qs from "qs"; // Importing the qs library:
 
+const CMS_URL = "http://localhost:1337";
+
 // Function returns a single object with all needed properties
 export async function getFeaturedReview() {
 	const reviews = await getReviews();
@@ -29,16 +31,11 @@ export async function getReview(slug) {
 	};
 }
 
-// slug: 'minecraft',
-// title: 'Minecraft',
-// date: '2023-10-07',
-// image: '/images/minecraft.jpg',
-
 // This component is used to get the data of all reviews:
 export async function getReviews() {
 	// Getting all reviews:
 	const url =
-		"http://localhost:1337/api/reviews?" +
+		`${CMS_URL}/api/reviews?` +
 		qs.stringify(
 			{
 				fields: ["slug", "title", "subtitle", "publishedAt"],
@@ -58,9 +55,10 @@ export async function getReviews() {
 	return data.map(({ attributes }) => ({
 		slug: attributes.slug,
 		title: attributes.title,
+		date: attributes.publishedAt.slice(0, "YYYY-MM-D".length), // This extracts only the date from the timestamp. Original: 2023-05-28T11:00:00.000Z
+		image: CMS_URL + attributes.image.data.attributes.url, // we have to create an absolute url to Strapi
 	}));
 }
-// http://localhost:1337/uploads/small_hollow_knight_da5257a59c.jpg
 
 // This function is used to get the slugs:
 export async function getSlugs() {
