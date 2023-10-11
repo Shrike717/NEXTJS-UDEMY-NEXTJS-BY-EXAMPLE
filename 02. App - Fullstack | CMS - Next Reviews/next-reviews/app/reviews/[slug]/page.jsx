@@ -4,11 +4,14 @@ import { getReview, getSlugs } from "@/lib/reviews";
 
 // This function generates an array of objects with the slugs of the markdown files.
 // The slugs are used to generate the static paths for the SSG pages.
+
+/*
 export async function generateStaticParams() {
 	const slugs = await getSlugs(); // But this is an array of strings
 	// We need to convert the array of strings to an array of objects:
 	return slugs.map((slug) => ({ slug }));
 }
+*/
 
 // This function is used to generate the metadata from the markdown files:
 export async function generateMetadata({ params: { slug } }) {
