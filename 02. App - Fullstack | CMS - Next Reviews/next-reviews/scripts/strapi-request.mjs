@@ -1,6 +1,6 @@
 // In this file we test the endpoints of our Strapi API
 
-// Importing fs module to write to file
+// Importing fs module to write to file:
 import { writeFileSync } from "node:fs";
 // Importing the qs library:
 import qs from "qs";
