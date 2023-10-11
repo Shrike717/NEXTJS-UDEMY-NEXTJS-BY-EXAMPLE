@@ -1,6 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import matter from "gray-matter"; // This package is used for parsing the metadata of the markdown file
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
+import qs from "qs"; // Importing the qs library:
 
 // Function returns a single object with all needed properties
 export async function getFeaturedReview() {
@@ -28,32 +29,38 @@ export async function getReview(slug) {
 	};
 }
 
+// slug: 'minecraft',
+// title: 'Minecraft',
+// date: '2023-10-07',
+// image: '/images/minecraft.jpg',
+
 // This component is used to get the data of all reviews:
 export async function getReviews() {
-	// Now filtering out the markdown files from the filenames
-	// The filter function returns true if the file is a markdown file:
-	let slugs = await getSlugs();
+	// Getting all reviews:
+	const url =
+		"http://localhost:1337/api/reviews?" +
+		qs.stringify(
+			{
+				fields: ["slug", "title", "subtitle", "publishedAt"],
+				populate: { image: { fields: ["url"] } },
+				sort: ["publishedAt:DESC"],
+				pagination: { pageSize: 6 },
+				// populate: "*"
+			},
+			{ encodeValuesOnly: true }
+		); // encodeValuesOnly: Encodes only the values and not the keys
+	console.log("getReviews: " + url);
 
-	// Now getting the data of all the reviews:
-	const reviews = [];
-	for (const slug of slugs) {
-		const review = await getReview(slug); // Passing the review name
-		// Getting back the reviews as objects and pushing them to the reviews array:
-		reviews.push(review);
-	}
-
-	// Sort the array by the "date" property in descending order. Needed for the homepage:
-	// My solution:
-	// reviews.sort((a, b) => {
-	// 	const dateA = new Date(a.date);
-	// 	const dateB = new Date(b.date);
-	// 	return dateB - dateA;
-	// });
-
-	// Solution from the course:
-	reviews.sort((a, b) => b.date.localeCompare(a.date));
-	return reviews;
+	const response = await fetch(url); // fetch is avalable as global function
+	const { data } = await response.json(); // We also need await because it returns a promise. We destructure the data array
+	// Then we map over it because we have to transform the items to fit our properties
+	// As all needed properties are in the attributes object, we destructure it:
+	return data.map(({ attributes }) => ({
+		slug: attributes.slug,
+		title: attributes.title,
+	}));
 }
+// http://localhost:1337/uploads/small_hollow_knight_da5257a59c.jpg
 
 // This function is used to get the slugs:
 export async function getSlugs() {
