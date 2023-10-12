@@ -1,5 +1,3 @@
-import { readdir, readFile } from "node:fs/promises";
-import matter from "gray-matter"; // This package is used for parsing the metadata of the markdown file
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import qs from "qs"; // Importing the qs library:
 
@@ -51,18 +49,15 @@ export async function getReviews() {
 
 // This function is used to get the slugs:
 export async function getSlugs() {
-	// Getting the filenames of all the markdown files:
-	const files = await readdir("./content/reviews");
+	// Getting all slugs:
+	const { data } = await fetchReviews({
+		fields: ["slug"],
+		sort: ["publishedAt:DESC"],
+		pagination: { pageSize: 100 },
+	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
+	// console.log("[getSlugs] data:", data);
 
-	// Now filtering out the markdown files from the filenames
-	// The filter function returns true if the file is a markdown file:
-	// We get back just the filenames. These are the slugs
-	return (
-		files
-			.filter((file) => file.endsWith(".md"))
-			// Removing the .md extension from the filenames:
-			.map((file) => file.replace(".md", ""))
-	);
+	return data.map((item) => item.attributes.slug); // We only need the slug property and return the array of slugs
 }
 
 // This helper-function fetches the reviews from the API. It returns the JSON response.
