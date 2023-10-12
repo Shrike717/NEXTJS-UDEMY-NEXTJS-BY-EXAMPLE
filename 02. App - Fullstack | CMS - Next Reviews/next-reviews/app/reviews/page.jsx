@@ -11,7 +11,7 @@ export const metadata = {
 export default async function ReviewsPage() {
 	// Getting all the reviews:
 	const reviews = await getReviews();
-	console.log("[Reviews] reviews:", reviews);
+	// console.log("[Reviews] reviews:", reviews);
 
 	return (
 		<>
