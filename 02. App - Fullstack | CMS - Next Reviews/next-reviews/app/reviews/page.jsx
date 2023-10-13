@@ -1,4 +1,4 @@
-// Importing th Link component to use client-side navigation
+// Importing the Link component to use client-side navigation
 import Link from "next/link";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
