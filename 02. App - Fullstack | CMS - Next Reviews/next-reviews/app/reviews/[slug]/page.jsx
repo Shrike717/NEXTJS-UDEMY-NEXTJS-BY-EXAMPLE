@@ -45,6 +45,7 @@ export default async function ReviewPage({ params: { slug } }) {
 				width="640"
 				height="360"
 				className="mb-2 rounded"
+				priority
 			/>
 			{/* Showing the markdown text */}
 			<article
