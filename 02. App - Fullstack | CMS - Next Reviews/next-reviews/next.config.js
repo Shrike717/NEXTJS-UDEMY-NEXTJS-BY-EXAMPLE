@@ -3,5 +3,16 @@
 /** @type {import(next).nextConfig} */
 
 module.exports = {
-	output: "export",
+	// output: "export",
+	// This allows us to use the Next.js Image component to optimize images
+	images: {
+		remotePatterns: [
+			{
+				protocol: "http",
+				hostname: "localhost",
+				port: "1337",
+				pathname: "/uploads/**",
+			},
+		],
+	},
 };

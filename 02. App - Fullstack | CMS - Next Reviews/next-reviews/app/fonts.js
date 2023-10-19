@@ -5,7 +5,6 @@ import { Exo_2, Exo, Orbitron } from "next/font/google";
 // latin is for English
 // Then setting exo_2 as variable to use it as TW utility class
 export const exo_2 = Exo_2({
-	// Not properly working as default font
 	subsets: ["latin"],
 	variable: "--font-exo-2",
 });
