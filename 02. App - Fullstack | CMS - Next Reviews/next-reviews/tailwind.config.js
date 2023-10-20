@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
-		"./app/**/*.{jsx,tsx}", // JSX and TSX files in the src folder
-		"./components/**/*.{jsx,tsx}", // JSX and TSX files in the src folder
+		// JSX and TSX files in the src folder
+		"./app/**/*.{jsx,tsx}",
+		// JSX and TSX files in the src folder
+		"./components/**/*.{jsx,tsx}",
 	],
 	theme: {
 		extend: {
 			fontFamily: {
 				// Default custom font family is set with sans key:
 				// sans: ["var(--font-exo)", "sans-serif"],
-				sans: ["var(--font-exo-2)", "sans-serif"],
+				sans: ["var(--font-exo2)", "sans-serif"],
 				// First setting the custom font variable, then a fallback font
 				orbitron: ["var(--font-orbitron)", "sans-serif"],
 			},

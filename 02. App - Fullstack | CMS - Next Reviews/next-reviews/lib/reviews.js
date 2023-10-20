@@ -3,12 +3,6 @@ import qs from "qs"; // Importing the qs library:
 
 const CMS_URL = "http://localhost:1337";
 
-// Function returns a single object with all needed properties
-export async function getFeaturedReview() {
-	const reviews = await getReviews();
-	return reviews[0];
-}
-
 // This function is used to get the data of a single review:
 export async function getReview(slug) {
 	// Getting a single review:
@@ -30,14 +24,14 @@ export async function getReview(slug) {
 	};
 }
 
-// This function is used to get the data of all reviews:
-export async function getReviews() {
+// This function is used to get the data of all reviews. It gets the parameter pageSize which determines the number of reviews to get:
+export async function getReviews(pageSize) {
 	// Getting all reviews:
 	const { data } = await fetchReviews({
 		fields: ["slug", "title", "subtitle", "publishedAt"],
 		populate: { image: { fields: ["url"] } },
 		sort: ["publishedAt:DESC"],
-		pagination: { pageSize: 6 },
+		pagination: { pageSize },
 		// populate: "*"
 	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
 	// console.log("[fetchReviews] data:", data);
