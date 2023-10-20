@@ -1,0 +1,3 @@
+{
+	"eslint.workingDirectories": ["./next-reviews", "./next-reviews-cms"]
+}

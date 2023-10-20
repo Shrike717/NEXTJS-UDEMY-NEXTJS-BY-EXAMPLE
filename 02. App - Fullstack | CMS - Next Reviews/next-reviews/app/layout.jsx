@@ -1,5 +1,5 @@
 import NavBar from "@/components/NavBar";
-import { orbitron, exo_2, exo } from "./fonts"; // Importing custom font to use it as utility font class
+import { orbitron, exo2, exo } from "./fonts"; // Importing custom font to use it as utility font class
 // Importing global style css:
 import "./globals.css";
 
@@ -17,14 +17,14 @@ export default function RootLayout({ children }) {
 		// Making font available in the whole app. exo_2 is default font
 		<html
 			lang="en"
-			className={`${exo.variable} ${exo_2.variable} ${orbitron.variable}`}
+			className={`${exo.variable} ${exo2.variable} ${orbitron.variable}`}
 		>
 			<head></head>
-			<body className="bg-orange-50 flex flex-col px-4 py-2 min-h-screen">
+			<body className="flex min-h-screen flex-col bg-orange-50 px-4 py-2">
 				<header>
 					<NavBar />
 				</header>
-				<main className="py-3 grow">{children}</main>
+				<main className="grow py-3">{children}</main>
 				<footer className="border-t py-3 text-center text-xs text-slate-500">
 					Game data and images courtesy of{" "}
 					<a
@@ -33,8 +33,7 @@ export default function RootLayout({ children }) {
 						className="text-orange-800 hover:underline"
 					>
 						RAWG
-					</a>{" "}
-					| Hosted by
+					</a>
 				</footer>
 			</body>
 		</html>

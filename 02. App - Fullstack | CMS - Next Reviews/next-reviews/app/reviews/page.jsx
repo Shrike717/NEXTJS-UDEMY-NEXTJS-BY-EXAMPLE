@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function ReviewsPage() {
 	// Getting all the reviews:
-	const reviews = await getReviews();
+	const reviews = await getReviews(6);
 	// console.log("[Reviews] reviews:", reviews);
 
 	return (
@@ -21,7 +21,7 @@ export default async function ReviewsPage() {
 				{reviews.map((review, index) => (
 					<li
 						key={review.slug}
-						className=" bg-white border rounded shadow w-80 hover:shadow-xl"
+						className=" w-80 rounded border bg-white shadow hover:shadow-xl"
 					>
 						{/* w-80 is exactly 320px. Thats the same width as the image. Border is now aligned */}
 						<Link href={`/reviews/${review.slug}`}>
@@ -33,7 +33,7 @@ export default async function ReviewsPage() {
 								height="180"
 								className="rounded-t"
 							/>
-							<h2 className="font-orbitron font-semibold py-1 text-center">
+							<h2 className="py-1 text-center font-orbitron font-semibold">
 								{review.title}
 							</h2>
 						</Link>
