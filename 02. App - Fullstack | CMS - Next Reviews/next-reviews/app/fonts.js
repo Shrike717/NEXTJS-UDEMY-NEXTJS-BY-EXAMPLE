@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+
 // Imports the Google Fonts Exo-2 and Orbitron
 import { Exo_2, Exo, Orbitron } from "next/font/google";
 

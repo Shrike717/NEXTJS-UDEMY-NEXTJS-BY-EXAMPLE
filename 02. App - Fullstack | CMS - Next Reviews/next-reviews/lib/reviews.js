@@ -78,6 +78,7 @@ function toReview(item) {
 	return {
 		slug: attributes.slug,
 		title: attributes.title,
+		subtitle: attributes.subtitle,
 		date: attributes.publishedAt.slice(0, "YYYY-MM-D".length), // This extracts only the date from the timestamp. Original: 2023-05-28T11:00:00.000Z
 		image: CMS_URL + attributes.image.data.attributes.url, // we have to create an absolute url to Strapi
 	};
