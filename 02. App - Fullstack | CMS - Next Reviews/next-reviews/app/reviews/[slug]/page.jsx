@@ -3,6 +3,9 @@ import Heading from "@/components/Heading";
 import ShareLinkButton from "@/components/ShareLinkButton";
 import { getReview, getSlugs } from "@/lib/reviews";
 
+// This configueres weether pages are generated at request time (SSR)
+// export const dynamicParams = true; // true | false. true by default
+
 // This function generates an array of objects with the slugs from the API Data.
 // The slugs are used to generate the static paths for the SSG pages needed in the next build.
 export async function generateStaticParams() {
@@ -28,9 +31,9 @@ export async function generateMetadata({ params: { slug } }) {
 // This component is responsible for showing the single review page
 // Here we dekonstruct the path from the url. The slug is the name of the markdown file
 export default async function ReviewPage({ params: { slug } }) {
+	console.log("[ReviewPage] rendering", slug);
 	// Calling the getReview function  with the dynamic slug parameter:
 	const review = await getReview(slug);
-	// console.log("[ReviewPage] review", review);
 
 	return (
 		<>

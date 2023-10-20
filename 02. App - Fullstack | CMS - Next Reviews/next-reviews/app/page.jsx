@@ -6,6 +6,10 @@ import { getReviews } from "@/lib/reviews";
 export default async function HomePage() {
 	// Load feaatured review
 	const featuredReviews = await getReviews(3);
+	console.log(
+		"[HomePage] rendering:",
+		featuredReviews.map((review) => review.slug).join(", ")
+	);
 
 	return (
 		<>
