@@ -35,6 +35,7 @@ export default async function ReviewPage({ params: { slug } }) {
 	return (
 		<>
 			<Heading>{review.title}</Heading>
+			<p className="pb-3 font-semibold">{review.subtitle}</p>
 			<div className="flex items-baseline gap-3">
 				<p className="pb-2 italic">{review.date}</p>
 				<ShareLinkButton />

@@ -1,6 +1,6 @@
 // Reusable Heading component
 export default function Heading({ children }) {
 	return (
-		<h1 className={"font-orbitron font-bold pb-3 text-2xl"}>{children}</h1>
+		<h1 className={"pb-3 font-orbitron text-2xl font-bold"}>{children}</h1>
 	);
 }

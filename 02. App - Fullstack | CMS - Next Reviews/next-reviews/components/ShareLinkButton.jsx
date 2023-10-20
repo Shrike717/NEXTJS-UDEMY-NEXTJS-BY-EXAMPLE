@@ -21,11 +21,11 @@ export default function ShareLinkButton() {
 	return (
 		<button
 			onClick={handleClick}
-			className="border flex gap-1 items-center px-2 py-1 rounded
-            text-slate-500 text-sm
+			className="flex items-center gap-1 rounded border px-2 py-1
+            text-sm text-slate-500
             hover:bg-orange-100 hover:text-slate-700"
 		>
-			<LinkIcon className=" w-4 h-4" />
+			<LinkIcon className=" h-4 w-4" />
 			{clicked ? "Link copied!" : "Share Link"}
 		</button>
 	);
