@@ -1,4 +1,5 @@
 import Image from "next/image"; // This is the Next.js Image component to optimize images
+import { notFound } from "next/navigation"; // This is the Next.js 404 page
 import Heading from "@/components/Heading";
 import ShareLinkButton from "@/components/ShareLinkButton";
 // import { getReview, getSlugs } from "@/lib/reviews";
@@ -27,6 +28,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params: { slug } }) {
 	// Calling the getReview function  with the dynamic slug parameter:
 	const review = await getReview(slug);
+
+	// If we have no review we return a 404 message:
+	if (!review) {
+		notFound();
+	}
 	// Then returning the metadata object:
 	return {
 		title: review.title,
@@ -41,6 +47,11 @@ export default async function ReviewPage({ params: { slug } }) {
 	console.log("[ReviewPage] rendering", slug);
 	// Calling the getReview function  with the dynamic slug parameter:
 	const review = await getReview(slug);
+
+	// If we have no review we return a 404 message:
+	if (!review) {
+		notFound();
+	}
 
 	return (
 		<>
