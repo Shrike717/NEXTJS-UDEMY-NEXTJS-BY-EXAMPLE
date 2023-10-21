@@ -4,6 +4,10 @@ import Image from "next/image";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
 
+// This forces this page to be generated at run time (SSR).
+// If this is set we have to comment out the getStaticParams function below.
+export const dynamic = "force-dynamic";
+
 // Metatags:
 export const metadata = {
 	title: "Reviews",

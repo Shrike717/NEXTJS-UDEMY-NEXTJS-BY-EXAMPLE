@@ -1,11 +1,17 @@
 import Image from "next/image"; // This is the Next.js Image component to optimize images
 import Heading from "@/components/Heading";
 import ShareLinkButton from "@/components/ShareLinkButton";
-import { getReview, getSlugs } from "@/lib/reviews";
+// import { getReview, getSlugs } from "@/lib/reviews";
+import { getReview } from "@/lib/reviews";
 
 // This configueres weether pages are generated at request time (SSR)
 // export const dynamicParams = true; // true | false. true by default
 
+// This forces this page to be generated at run time (SSR).
+// If this is set we have to comment out the getStaticParams function below.
+export const dynamic = "force-dynamic";
+
+/*
 // This function generates an array of objects with the slugs from the API Data.
 // The slugs are used to generate the static paths for the SSG pages needed in the next build.
 export async function generateStaticParams() {
@@ -15,6 +21,7 @@ export async function generateStaticParams() {
 	// We need to convert the array of strings to an array of objects:
 	return slugs.map((slug) => ({ slug }));
 }
+*/
 
 // This function is used to generate the metadata from the markdown files:
 export async function generateMetadata({ params: { slug } }) {

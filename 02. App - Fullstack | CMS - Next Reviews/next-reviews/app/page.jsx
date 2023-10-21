@@ -3,6 +3,10 @@ import Link from "next/link";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews";
 
+// This forces this page to be generated at run time (SSR).
+// If this is set we have to comment out the getStaticParams function below.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
 	// Load feaatured review
 	const featuredReviews = await getReviews(3);
