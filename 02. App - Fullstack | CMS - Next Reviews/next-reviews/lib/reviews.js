@@ -6,14 +6,20 @@ const CMS_URL = "http://localhost:1337";
 // This function is used to get the data of a single review:
 export async function getReview(slug) {
 	// Getting a single review:
+	// This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
 	const { data } = await fetchReviews({
 		filters: { slug: { $eq: slug } },
 		fields: ["slug", "title", "subtitle", "publishedAt", "body"],
 		populate: { image: { fields: ["url"] } },
 		pagination: { pageSize: 1, withCount: false },
 		// populate: "*"
-	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
+	});
 	// console.log("[getReview] data:", data);
+
+	// Here  we need a check if we get data for a certain review from the CMS. If not, we return null:
+	if (data.length === 0) {
+		return null;
+	}
 
 	// This is the single review object from the data array. Its the first element:
 	const item = data[0];
