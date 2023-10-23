@@ -4,9 +4,6 @@ import Image from "next/image";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
 
-// This forces this page to be generated after a time period:
-export const revalidate = 30; // 30 seconds
-
 // Metatags:
 export const metadata = {
 	title: "Reviews",

@@ -3,9 +3,6 @@ import Link from "next/link";
 import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews";
 
-// This forces this page to be generated after a time period:
-export const revalidate = 30; // 30 seconds
-
 export default async function HomePage() {
 	// Load feaatured review
 	const featuredReviews = await getReviews(3);

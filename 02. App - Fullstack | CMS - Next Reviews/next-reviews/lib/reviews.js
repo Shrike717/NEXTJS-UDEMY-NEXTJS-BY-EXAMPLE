@@ -68,7 +68,11 @@ async function fetchReviews(parameters) {
 		`${CMS_URL}/api/reviews?` +
 		qs.stringify(parameters, { encodeValuesOnly: true }); // encodeValuesOnly: Encodes only the values and not the keys
 
-	const response = await fetch(url); // fetch is avalable as global function
+	const response = await fetch(url, {
+		next: {
+			revalidate: 30, // This is the revalidation time in seconds.
+		},
+	}); // fetch is avalable as global function
 	// console.log("[fetchReviews] response:", response);
 
 	// Error when the response is not ok:
