@@ -1,7 +1,11 @@
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import qs from "qs"; // Importing the qs library:
 
+// Base Url für Strapi CMS:
 const CMS_URL = "http://localhost:1337";
+
+// Constant for the tag we need to set at fetch request for revalidaion on demand:
+export const CACHE_TAG_REVIEWS = "review";
 
 // This function is used to get the data of a single review:
 export async function getReview(slug) {
@@ -70,7 +74,7 @@ async function fetchReviews(parameters) {
 
 	const response = await fetch(url, {
 		next: {
-			revalidate: 30, // This is the revalidation time in seconds.
+			tags: [CACHE_TAG_REVIEWS], // This invalidates the cache for the reviews when the data changes in the CMS
 		},
 	}); // fetch is avalable as global function
 	// console.log("[fetchReviews] response:", response);
