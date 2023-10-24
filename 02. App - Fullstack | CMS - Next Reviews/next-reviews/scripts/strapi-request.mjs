@@ -27,16 +27,32 @@ import qs from "qs";
 // **************
 
 // Getting a single review:
+// const url =
+// 	"http://localhost:1337/api/reviews" +
+// 	"?" +
+// 	qs.stringify(
+// 		{
+// 			filters: { slug: { $eq: "hades-2018" } },
+// 			fields: ["slug", "title", "subtitle", "publishedAt", "body"],
+// 			populate: { image: { fields: ["url"] } },
+// 			pagination: { pageSize: 1, withCount: false },
+// 			// populate: "*"
+// 		},
+// 		{ encodeValuesOnly: true }
+// 	); // encodeValuesOnly: Encodes only the values and not the keys
+// console.log("url: " + url);
+
+// **************
+// Getting all reviews to with pageeSize and page to analyze pagination:
 const url =
 	"http://localhost:1337/api/reviews" +
 	"?" +
 	qs.stringify(
 		{
-			filters: { slug: { $eq: "hades-2018" } },
-			fields: ["slug", "title", "subtitle", "publishedAt", "body"],
+			fields: ["slug", "title", "subtitle", "publishedAt"],
 			populate: { image: { fields: ["url"] } },
-			pagination: { pageSize: 1, withCount: false },
-			// populate: "*"
+			sort: ["publishedAt:DESC"],
+			pagination: { pageSize: 6, page: 1 },
 		},
 		{ encodeValuesOnly: true }
 	); // encodeValuesOnly: Encodes only the values and not the keys
