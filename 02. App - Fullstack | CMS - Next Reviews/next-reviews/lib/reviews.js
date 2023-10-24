@@ -35,13 +35,13 @@ export async function getReview(slug) {
 }
 
 // This function is used to get the data of all reviews. It gets the parameter pageSize which determines the number of reviews to get:
-export async function getReviews(pageSize) {
+export async function getReviews(pageSize, page) {
 	// Getting all reviews:
 	const { data } = await fetchReviews({
 		fields: ["slug", "title", "subtitle", "publishedAt"],
 		populate: { image: { fields: ["url"] } },
 		sort: ["publishedAt:DESC"],
-		pagination: { pageSize },
+		pagination: { pageSize, page },
 		// populate: "*"
 	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
 	// console.log("[fetchReviews] data:", data);
@@ -77,7 +77,12 @@ async function fetchReviews(parameters) {
 			tags: [CACHE_TAG_REVIEWS], // This invalidates the cache for the reviews when the data changes in the CMS
 		},
 	}); // fetch is avalable as global function
+
+	// This is a testlog to print the full reponse object:
 	// console.log("[fetchReviews] response:", response);
+
+	// This is a testlog to print the full URL:
+	// console.log("[fetchReviews] url:", url);
 
 	// Error when the response is not ok:
 	if (!response.ok) {

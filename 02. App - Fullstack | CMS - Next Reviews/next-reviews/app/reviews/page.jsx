@@ -9,13 +9,16 @@ export const metadata = {
 	title: "Reviews",
 };
 
+const PAGE_SIZE = 6; // Number of reviews per page
+
 export default async function ReviewsPage({ searchParams }) {
 	// searchParams is the query string from the URL
 	const page = parsePageParam(searchParams.page);
 
 	// Getting all the reviews:
-	const reviews = await getReviews(6);
-	console.log("[ReviewsPage] props:", page);
+	const reviews = await getReviews(PAGE_SIZE, page);
+
+	// console.log("[ReviewsPage] props:", page);
 
 	return (
 		<>
