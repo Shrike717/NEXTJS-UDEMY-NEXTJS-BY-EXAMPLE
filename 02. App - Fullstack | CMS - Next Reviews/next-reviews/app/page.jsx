@@ -5,10 +5,10 @@ import { getReviews } from "@/lib/reviews";
 
 export default async function HomePage() {
 	// Load feaatured review
-	const featuredReviews = await getReviews(3);
+	const { reviews } = await getReviews(3);
 	console.log(
 		"[HomePage] rendering:",
-		featuredReviews.map((review) => review.slug).join(", ")
+		reviews.map((review) => review.slug).join(", ")
 	);
 
 	return (
@@ -16,7 +16,7 @@ export default async function HomePage() {
 			<Heading>Indie Gamer</Heading>
 			<p className="pb-3">Only the best indie games, reviewed for you!</p>
 			<ul className="flex flex-col gap-3">
-				{featuredReviews.map((review, index) => (
+				{reviews.map((review, index) => (
 					<li
 						key={review.slug}
 						className=" w-80 rounded border bg-white shadow hover:shadow-xl sm:w-full"

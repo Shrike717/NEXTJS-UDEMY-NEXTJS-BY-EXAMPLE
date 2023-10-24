@@ -37,7 +37,7 @@ export async function getReview(slug) {
 // This function is used to get the data of all reviews. It gets the parameter pageSize which determines the number of reviews to get:
 export async function getReviews(pageSize, page) {
 	// Getting all reviews:
-	const { data } = await fetchReviews({
+	const { data, meta } = await fetchReviews({
 		fields: ["slug", "title", "subtitle", "publishedAt"],
 		populate: { image: { fields: ["url"] } },
 		sort: ["publishedAt:DESC"],
@@ -47,8 +47,11 @@ export async function getReviews(pageSize, page) {
 	// console.log("[fetchReviews] data:", data);
 
 	// Then we map over it because we have to transform the items to fit our properties
-	// For this, we call our helper function toReview. Every element then gets conveted to the object we need:
-	return data.map(toReview);
+	// For this, we call our helper function toReview. Every element then gets converted to the object we need:
+	return {
+		pageCount: meta.pagination.pageCount,
+		reviews: data.map(toReview),
+	};
 }
 
 // This function is used to get the slugs:
