@@ -8,6 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"@headlessui/react": "^1.7.17",
 		"@heroicons/react": "^2.0.18",
 		"eslint-config-standard": "^17.1.0",
 		"eslint-plugin-tailwindcss": "^3.13.0",

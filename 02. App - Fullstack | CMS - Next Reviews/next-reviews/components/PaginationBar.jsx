@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 export default function PaginationBar({ href, page, pageCount }) {
 	return (
-		<div className="flex items-center gap-2 pb-3">
+		<div className="flex items-center gap-2 ">
 			<PaginationLink
 				href={`${href}?page=${page - 1}`}
 				enabled={page > 1}

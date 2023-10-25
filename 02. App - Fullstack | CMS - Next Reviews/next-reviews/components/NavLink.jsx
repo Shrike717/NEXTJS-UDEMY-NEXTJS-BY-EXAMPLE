@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export default function NavLink({ children, href, prefetch }) {
 	// Getting the path of the current page using the usePathname hook.
 	const pathname = usePathname();
-	console.log("[NavLink] pathname: ", pathname);
+	// console.log("[NavLink] pathname: ", pathname);
 	// Checking if the path of the current page is the same as the path of the link.
 	if (pathname === href) {
 		return (
