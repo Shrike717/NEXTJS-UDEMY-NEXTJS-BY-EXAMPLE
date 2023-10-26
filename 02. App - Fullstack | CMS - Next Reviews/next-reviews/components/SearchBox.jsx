@@ -4,16 +4,8 @@ import { Combobox } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const reviews = [
-	{ slug: "hades-2018", title: "Hades" },
-	{ slug: "fall-guys", title: "Fall Guys: Ultimate Knockout" },
-	{ slug: "black-mesa", title: "Black Mesa" },
-	{ slug: "disco-elysium", title: "Disco Elysium" },
-	{ slug: "dead-cells", title: "Dead Cells" },
-];
-
 // This component will be used to search for a specific review
-export default function SearchBox() {
+export default function SearchBox({ reviews }) {
 	// Using the Next.js router to get the query string from the URL:
 	const router = useRouter();
 
@@ -22,9 +14,11 @@ export default function SearchBox() {
 	// console.log("Search Query:", query);
 
 	// Filtering the reviews with the query:
-	const filteredReviews = reviews.filter((review) => {
-		return review.title.toLowerCase().includes(query.toLowerCase());
-	});
+	const filteredReviews = reviews
+		.filter((review) => {
+			return review.title.toLowerCase().includes(query.toLowerCase());
+		})
+		.slice(0, 5);
 
 	// Function to route tto a selected review:
 	function handleChange(review) {

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Heading from "@/components/Heading";
-import { getReviews } from "@/lib/reviews"; // Function to get all the reviews
+import { getReviews, getSearchableReviews } from "@/lib/reviews"; // Function to get all the reviews
 import PaginationBar from "@/components/PaginationBar";
 import SearchBox from "@/components/SearchBox";
 
@@ -20,6 +20,9 @@ export default async function ReviewsPage({ searchParams }) {
 	// Getting all the reviews:
 	const { reviews, pageCount } = await getReviews(PAGE_SIZE, page);
 
+	// Getting all the reviews for the search functionality:
+	const searchableReviews = await getSearchableReviews();
+
 	// console.log(
 	// 	"[ReviewsPage] reviews:",
 	// 	reviews.map(({ slug, title }) => ({ slug, title }))
@@ -35,7 +38,7 @@ export default async function ReviewsPage({ searchParams }) {
 					page={page}
 					pageCount={pageCount}
 				/>
-				<SearchBox />
+				<SearchBox reviews={searchableReviews} />
 			</div>
 
 			<ul className="flex flex-row flex-wrap gap-3 ">

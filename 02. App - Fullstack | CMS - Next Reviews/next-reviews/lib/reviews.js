@@ -54,6 +54,22 @@ export async function getReviews(pageSize, page) {
 	};
 }
 
+// This function is used to get the data for searching from th CMS:
+export async function getSearchableReviews() {
+	// Getting all slugs:
+	const { data } = await fetchReviews({
+		fields: ["slug", "title"],
+		sort: ["publishedAt:DESC"],
+		pagination: { pageSize: 100 },
+	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
+	// console.log("[getSlugs] data:", data);
+
+	return data.map(({ attributes }) => ({
+		slug: attributes.slug,
+		title: attributes.title,
+	})); // We  need the slug property and the title property and return the array for the search functionality
+}
+
 // This function is used to get the slugs:
 export async function getSlugs() {
 	// Getting all slugs:
