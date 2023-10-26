@@ -20,7 +20,10 @@ export default async function ReviewsPage({ searchParams }) {
 	// Getting all the reviews:
 	const { reviews, pageCount } = await getReviews(PAGE_SIZE, page);
 
-	// console.log("[ReviewsPage] props:", page);
+	// console.log(
+	// 	"[ReviewsPage] reviews:",
+	// 	reviews.map(({ slug, title }) => ({ slug, title }))
+	// );
 
 	return (
 		<>
