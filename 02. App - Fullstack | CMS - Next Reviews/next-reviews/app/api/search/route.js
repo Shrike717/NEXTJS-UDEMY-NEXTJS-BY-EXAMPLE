@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 // This route handler will be used to call the CMS API from our Next server.
 // This prevents having to call it direcly from a browser, which would expose the API
 export async function GET(request) {
+	// console.log(request);
 	// Extracting the nextUrl property from the request object:
 	// We can use a get() method to extract the query parameter from the URL
 	const query = request.nextUrl.searchParams.get("query");

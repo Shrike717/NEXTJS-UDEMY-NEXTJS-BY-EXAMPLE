@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Combobox } from "@headlessui/react";
-import { searchReviews } from "@/lib/reviews";
 
 // This component will be used to search for a specific review
 export default function SearchBox() {
@@ -22,7 +21,11 @@ export default function SearchBox() {
 		// fetch the reviews from the API:
 		if (query.length > 1) {
 			(async () => {
-				const reviews = await searchReviews(query);
+				// Now we are calling the route handler to get the reviews from the API:
+				const response = await fetch(
+					"/api/search?query=" + encodeURIComponent(query)
+				);
+				const reviews = await response.json();
 				setReviews(reviews);
 			})();
 		} else {

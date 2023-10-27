@@ -1,3 +1,6 @@
+// This is a check to see if a client side component can make a request to a extrnal API. Not wanted!
+import "server-only";
+
 import { marked } from "marked"; //  This package is used for convetting markdown to HTML
 import qs from "qs"; // Importing the qs library:
 
