@@ -1,11 +1,12 @@
 "use client";
 
-import { Combobox } from "@headlessui/react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Combobox } from "@headlessui/react";
+import { searchReviews } from "@/lib/reviews";
 
 // This component will be used to search for a specific review
-export default function SearchBox({ reviews }) {
+export default function SearchBox() {
 	// Using the Next.js router to get the query string from the URL:
 	const router = useRouter();
 
@@ -13,12 +14,21 @@ export default function SearchBox({ reviews }) {
 	const [query, setQuery] = useState("");
 	// console.log("Search Query:", query);
 
-	// Filtering the reviews with the query:
-	const filteredReviews = reviews
-		.filter((review) => {
-			return review.title.toLowerCase().includes(query.toLowerCase());
-		})
-		.slice(0, 5);
+	// State to get the reviews from the API when typing in the searchbox:
+	const [reviews, setReviews] = useState([]);
+
+	// Function to get the reviews from the API when typing in the searchbox:
+	useEffect(() => {
+		// fetch the reviews from the API:
+		if (query.length > 1) {
+			(async () => {
+				const reviews = await searchReviews(query);
+				setReviews(reviews);
+			})();
+		} else {
+			setReviews([]);
+		}
+	}, [query]);
 
 	// Function to route tto a selected review:
 	function handleChange(review) {
@@ -36,7 +46,7 @@ export default function SearchBox({ reviews }) {
 					onChange={(event) => setQuery(event.target.value)}
 				/>
 				<Combobox.Options className="absolute w-full bg-white py-1  ">
-					{filteredReviews.map((review) => (
+					{reviews.map((review) => (
 						<Combobox.Option key={review.slug} value={review}>
 							{({ active }) => (
 								<span

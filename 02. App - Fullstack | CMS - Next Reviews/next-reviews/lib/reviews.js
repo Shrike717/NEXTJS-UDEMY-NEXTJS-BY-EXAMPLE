@@ -54,13 +54,14 @@ export async function getReviews(pageSize, page) {
 	};
 }
 
-// This function is used to get the data for searching from th CMS:
-export async function getSearchableReviews() {
-	// Getting all slugs:
+// This function is used to get the data for searching from the CMS:
+export async function searchReviews(query) {
+	// Getting all titles:
 	const { data } = await fetchReviews({
+		filters: { title: { $containsi: query } }, // $containsi: This is a special operator for Strapi to search for a string in a case-insensitive way
 		fields: ["slug", "title"],
-		sort: ["publishedAt:DESC"],
-		pagination: { pageSize: 100 },
+		sort: ["title"],
+		pagination: { pageSize: 5 },
 	}); // This is calling our helper fuction to fetch the JSON response from the API. Parameters is the sq object we defined for filters and needed fields from API.
 	// console.log("[getSlugs] data:", data);
 
