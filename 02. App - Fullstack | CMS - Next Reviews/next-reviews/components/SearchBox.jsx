@@ -20,14 +20,19 @@ export default function SearchBox() {
 	useEffect(() => {
 		// fetch the reviews from the API:
 		if (query.length > 1) {
+			// Here we are using the AbortController to cancel the fetch request when the user types in the searchbox:
+			const controller = new AbortController();
 			(async () => {
+				const url = "/api/search?query=" + encodeURIComponent(query);
 				// Now we are calling the route handler to get the reviews from the API:
-				const response = await fetch(
-					"/api/search?query=" + encodeURIComponent(query)
-				);
+				const response = await fetch(url, {
+					signal: controller.signal,
+				});
 				const reviews = await response.json();
 				setReviews(reviews);
 			})();
+			// This is a useEffect cleanup function that will be called after every request. It will cancel the fetch request when the user types in the searchbox:
+			return () => controller.abort();
 		} else {
 			setReviews([]);
 		}
