@@ -5,7 +5,7 @@ import { marked } from "marked"; //  This package is used for convetting markdow
 import qs from "qs"; // Importing the qs library:
 
 // Base Url für Strapi CMS:
-const CMS_URL = "http://localhost:1337";
+const CMS_URL = process.env.CMS_URL;
 
 // Constant for the tag we need to set at fetch request for revalidaion on demand:
 export const CACHE_TAG_REVIEWS = "review";
