@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useDebounce } from "use-debounce"; // Needed for debouncing the search input
 import { useRouter } from "next/navigation";
 import { Combobox } from "@headlessui/react";
 
@@ -13,17 +14,21 @@ export default function SearchBox() {
 	const [query, setQuery] = useState("");
 	// console.log("Search Query:", query);
 
+	// Here we initialize the debounced query:
+	const [debouncedQuery] = useDebounce(query, 300); // The second argument is the delay in milliseconds
+
 	// State to get the reviews from the API when typing in the searchbox:
 	const [reviews, setReviews] = useState([]);
 
 	// Function to get the reviews from the API when typing in the searchbox:
 	useEffect(() => {
 		// fetch the reviews from the API:
-		if (query.length > 1) {
+		if (debouncedQuery.length > 1) {
 			// Here we are using the AbortController to cancel the fetch request when the user types in the searchbox:
 			const controller = new AbortController();
 			(async () => {
-				const url = "/api/search?query=" + encodeURIComponent(query);
+				const url =
+					"/api/search?query=" + encodeURIComponent(debouncedQuery);
 				// Now we are calling the route handler to get the reviews from the API:
 				const response = await fetch(url, {
 					signal: controller.signal,
@@ -36,7 +41,7 @@ export default function SearchBox() {
 		} else {
 			setReviews([]);
 		}
-	}, [query]);
+	}, [debouncedQuery]);
 
 	// Function to route tto a selected review:
 	function handleChange(review) {
